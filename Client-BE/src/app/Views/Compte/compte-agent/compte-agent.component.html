@@ -1,0 +1,238 @@
+<div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+
+
+
+
+          <div class="css-treeview">
+              <h4>Votre Compte</h4>
+              <ul class="tree-list-pad">
+                  <li><input type="checkbox" checked="checked" id="item-0" /><label (click)="menuAnnonce()" for="item-0"><span></span>Publier une annonce</label>
+
+                  </li>
+
+                <li><input type="checkbox" checked="checked" id="item-0" /><label (click)="menuPub()" for="item-0"><span></span>Liste Utilisateurs</label>
+
+                </li>
+                <li>
+                  <input type="checkbox" id="item-1" checked="checked" /><label  for="item-1">Publication à valider</label>
+                  <ul>
+                    <li><a (click)="menuCom()">Animals</a></li>
+                    <li><a href="womens.html">Produit pour elevage</a></li>
+                  </ul>
+                </li>
+
+                <li>
+                    <input type="checkbox" id="item-1" checked="checked" /><label routerLink="/animal" for="item-1">Les annonces</label>
+                  </li>
+                <li>
+                    <input type="checkbox" id="item-1" checked="checked" /><label routerLink="/animal" for="item-1"><strong>Deconnexion</strong></label>
+                  </li>
+              </ul>
+            </div>
+
+
+    <!--
+
+
+        <h1 class="my-4">Mon Compte</h1>
+        <div class="list-group">
+          <a (click)="menuPub()" class="list-group-item">Liste publication</a>
+          <a href="#" (click)="menuCom()" class="list-group-item">Liste des commandes</a>
+          <a href="#" class="list-group-item">DECONNEXION</a>
+        </div>
+
+
+     /.col-lg-3 -->
+    </div>
+      <div  class="col-lg-9">
+
+
+
+
+        <div *ngIf="mode==1"  class="bs-docs-example">
+          <table   class="table table-striped">
+            <thead>
+              <tr>
+                <th><h3>Animal</h3></th>
+                <th ><h3 >IMAGE</h3></th>
+                <th><h3>PRIX</h3></th>
+              <th><h3>ELEVEUR</h3></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let a of animals">
+              <tr>
+                <td><h3>{{a.nom}}</h3> </td>
+                <td ><a data-toggle="modal" data-target="#myModal15"> <img style="height: 150px;width: 150px;"  [src]="a.photo"/></a></td>
+                <td><h3>{{a.prix}} fr</h3></td>
+                <td><h3>{{a.eleveur.utilisateur.nom}} {{a.eleveur.utilisateur.prenom}}</h3></td>
+                <td>
+                  <div>
+                    <button (click)="validerAnnonce(a)"><h3>Valider</h3> </button>
+                  </div>
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+
+    <div class="modal-body modal-spa" *ngIf="mode==0" style="margin-left: 10%; margin-right: 15%">
+        <h3 style="margin-left: 27%; margin-bottom: 8%">Annonce Gouvernementale</h3>
+        <p></p>
+
+
+        <div class="login-grids">
+
+
+        <form [formGroup]="produitForm">
+
+
+
+      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+            <div class="login">
+
+                <div class="login-bottom">
+
+                  <div class="login-left">
+                    <div class="form-group">
+                        <div class="sign-up"  >
+                          Type annonce :
+                        <select  placeholder="sexe" class="form-control"  formControlName="typeannonce" style="width: 70% ">
+                            <option value="male">campagne de vaccination</option>
+                          <option value="male">Recommandation</option>
+                          
+                        </select>
+                      </div>
+                    </div>
+
+
+                    
+                </div>
+
+
+                        <div class="sign-up">
+                            <h4>Description :</h4>
+                            <textarea type="text" class="form-control"  formControlName="description" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required></textarea>
+                        </div>
+                      <br/>
+
+
+                </div>
+                <div class="login-right">
+                    <div class="form-group" style=" margin-left: 12%">
+                        <div class="sign-up"  >
+                          Destiné :
+                        <select   class="form-control"  formControlName="destine" style="width: 70% " required>
+                            <option value="male">Tous les acteurs</option>
+                          <option value="male">Eleveurs</option>
+                          <option value="male">Gies</option>
+                          <option value="femelle">Vétérinaires</option>
+                          <option value="femelle">Distributeurs</option>
+                        </select>
+                      </div>
+                        </div>
+
+
+                    <p></p>
+
+                <p></p>
+                        <div class="sign-in" >
+                            <button class="btn btn-primary" type="submit" [disabled]="!animalForm.valid" style="width: 50%; margin-left: 25%" (click)=" postAnimal(animalForm)" value="Valider" >Valider</button>
+                        </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+            <p></p>
+        </form>
+          </div>
+      </div>
+
+      <div *ngIf="mode==2" class="panel panel-primary">
+        <div class="panel-heading">Liste des utilisateurs</div>
+        <div class="panel-body">
+          <div>
+              <button routerLink="/newClient" class="btn btn-primary">Nouveau</button>
+          </div>
+         <p></p>
+         <div class="form-group">
+            <label>Mot Clé:</label>
+            <input type="text" [(ngModel)]="motCle"/>
+            <button class="btn btn-primary" (click)="chercher()">Chercher</button>
+
+            <label style="margin-left: 25%">Par Profil:</label>
+           <select style="width: 15%;margin-left: 60%"  class="form-control"   formControlName="typeproduit">
+                    <option  *ngFor="let t of typeanimals"  value="{{t.libelle}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                       {{t.libelle}}
+                    </option>
+                  </select>
+       
+          <table class="table table-striped table-hover">
+            <tr>
+              <td>Prenom</td><td>Nom</td><td>Adresse</td><td>Email</td><td>tel</td><td>Profil</td>
+            </tr>
+      
+            <tr *ngFor="let e of allusers">
+              
+              <td>{{e.prenom}}</td>
+              <td>{{e.nom}}</td>
+              <td>{{e.adresse}}</td>
+              <td>{{e.email}}</td>
+              <td>{{e.telephone}}</td>
+              <td>{{e.profil}}</td>
+              <td>
+                <a (click)="onEditClient(e.cni)">Editer</a><br/>
+                <a (click)="deleteClient(e)">Supprimer</a>
+              </td>
+              
+            </tr>
+          </table>
+      
+      
+    
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+
+  <!--modal**************************************************-->
+
+  <div class="modal fade" id="myModal15" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-info">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body modal-spa">
+                <div class="login-grids">
+
+
+
+
+
+
+
+
+
+
+                    <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+

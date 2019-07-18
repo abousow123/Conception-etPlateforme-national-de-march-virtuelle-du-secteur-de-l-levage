@@ -1,0 +1,391 @@
+
+<!--The content below is only a placeholder and can be replaced.-->
+ <!-- header
+ <div class="header">
+  <div class="container">
+      <ul>
+          <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Free and Fast Delivery</li>
+          <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Free shipping On all orders</li>
+          <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">info@example.com</a></li>
+      </ul>
+  </div>
+</div> -->
+<!-- //header -->
+<!-- header-bot -->
+<div >
+    <div class="container" >
+        <div class="col-md-3 header-left">
+            <h1><a routerLink="/animal"><img src="/assets/images/b.bmp"></a></h1>
+        </div>
+        <div class="col-md-6 header-middle">
+            <form [formGroup]="produitForm">
+                <div class="search" >
+                    <input type="search" placeholder="Chercher animal, materiels d'elevage" formControlName="search1" >
+                </div>
+                <div class="section_room">
+                    <select class="form-control"  formControlName="search2" class="frm-field required">
+                        <option value="Tous categories">Tous categories</option>
+                        <option value="animaux">animaux</option>
+                        <option value="Aliments pour bétails">Aliments pour bétails</option>
+                        <option value="Matérils d'élevavage">Matérils d'élevavage</option>
+                        <option value="Médicament et vaccin">Médicament et vaccin</option>
+
+                    </select>
+                </div>
+                <div class="sear-sub">
+                    <input type="submit" value="" (click)="getAnimalsByName()">
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <div *ngIf="log1==1" class="col-md-3 header-right footer-bottom">
+            <ul>
+              <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal5"><span style="width: 35%">Se connecter</span></a></li>
+              <li><a  href="#"></a></li>
+              <li><a class="fb" href="#"></a></li>
+              <li><a class="insta" href="#"></a></li>
+              <li><a class="you" href="#"></a></li>
+            </ul>
+        </div>
+        <div *ngIf="log1==0" class="col-md-3 header-right footer-bottom">
+            <ul>
+              <li><a href="#" class="use1" routerLink="/compteEleveur"><span style="width: 35%">Agent</span></a></li>
+              <li><a href="#"></a></li>
+              <li><a class="fb" href="#"></a></li>
+              <li><a class="insta" href="#"></a></li>
+              <li><a class="you" href="#"></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+  </div>
+  <!-- //header-bot -->
+  <!-- banner -->
+  <div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav menu__list">
+                    <li class="active menu__item menu__item--current"><a class="menu__link" routerLink="/animal">Accueil <span class="sr-only">(current)</span></a></li>
+                    <li class="dropdown menu__item">
+                        <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catégories Animaux <span class="caret"></span></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <div class="row">
+
+                                    <div class="col-sm-3 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            <li><a routerLink="/bovin">Boeuf-Vache</a></li>
+                                            <li><a routerLink="/ovin">Mouton</a></li>
+                                            <li><a routerLink="/caprin">Chévre</a></li>
+                                            <li><a routerLink="/porcin">Porc</a></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-3 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                          <li><a routerLink="/avicole">Poulets</a></li>
+                                          <li><a routerLink="/equin">Cheval</a></li>
+                                          <li><a routerLink="/canin">Chien-Chat</a></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </ul>
+                    </li>
+                    <li class="dropdown menu__item">
+                        <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catégories de Produits<span class="caret"></span></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <div class="row">
+                                    <div class="col-sm-3 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            <li><a href="womens.html">Produits pour Elevage</a></li>
+                                            <li><a href="womens.html">Vaccins</a></li>
+                                            <li><a href="womens.html">Medicaments</a></li>
+                                           
+                                        </ul>
+                                    </div>
+                                   
+
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </ul>
+                    </li>
+                  <!--  <li class=" menu__item"><a class="menu__link" routerLink="/newprodelevage">Publier</a></li> -->
+
+                    <li class=" menu__item"><a class="menu__link" data-toggle="modal" data-target="#myModal5">contact</a></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+        </div>
+        <div  class="top_nav_right">
+            <div class="cart box_1">
+                        <a routerLink="/ligneComClient">
+                            <h3> <div class="total">
+                                <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+                                 ( <span>{{log1}}</span> )</div>
+
+                            </h3>
+                        </a>
+                        <p><a routerLink="/ligneComClient" class="simpleCart_empty">achats</a></p>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+  </div>
+
+<router-outlet *ngIf="num==0"></router-outlet>
+
+ <!-- ************************************************************************* -->
+<div *ngIf="num==1" class="men-wear">
+        <div class="container">
+
+
+
+          <div class="single-pro">
+
+            <div *ngFor="let b of animals"  class="col-md-3 product-men">
+              <div  class="men-pro-item simpleCart_shelfItem">
+                <div class="men-thumb-item">
+                  <img [src]="b.photo" alt="" class="pro-image-front">
+                  <img [src]="b.photo" alt="" class="pro-image-back">
+                    <div class="men-cart-pro">
+                      <div class="inner-men-cart-pro">
+                        <a (click)="onDetailsAnimal(b.idanimal)" class="link-product-add-cart">Quick View</a>
+                      </div>
+                    </div>
+                    <span class="product-new-top">New</span>
+                </div>
+                <div class="item-info-product ">
+                  <h4><a href="single.html"> {{b.nom}} </a></h4>
+                  <div class="info-product-price">
+                    <span class="item_price"> {{b.prix}} fr</span>
+
+                  </div>
+                  <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                </div>
+              </div>
+
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+    <p></p>
+    <div  class="pagination-grid text-right">
+        <ul class="pagination paging">
+          <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+          <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+  <!-- footer -->
+  <div class="footer">
+    <div class="container">
+
+        <div class="col-md-9 footer-right">
+            <div class="col-sm-6 newsleft">
+                <h3>S'INSCRIRE AUX NEWSLETTERS </h3>
+            </div>
+            <div class="col-sm-6 newsright">
+                <form>
+                    <input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="sign-grds">
+                <div class="col-md-4 sign-gd">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a routerLink="/animal">Accueil</a></li>
+                        <li><a href="http://www.elevage.gouv.sn/"> Ministère de l’Elevage</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-4 sign-gd-two">
+                    <h4>Store Information</h4>
+                    <ul>
+                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : VDN, Bd du Koweit Immeuble Graphi Plus - BP 45677 - Dakar.</li>
+                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="mailto:info@example.com">bourseElevage@gouv.sn</a></li>
+                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : +221 33 843 23 23</li>
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <p class="copy-right">&copy 2019 Bourse de l'Elevage. All rights reserved | Design by <a href="http://w3layouts.com/">Trade Point Senegal</a></p>
+    </div>
+  </div>
+  <!-- //footer -->
+  <!-- login -->
+            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content modal-info">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body modal-spa">
+                            <div class="login-grids">
+                                <div class="login">
+
+                                  <p></p>
+
+                                      <div class="form-group" style="width: 50%; margin-left: 2%" >
+                                          <h2>Profil</h2>
+                                          <select   class="form-control"  [(ngModel)]="idroless" >
+                                            <option  *ngFor="let r of roles"  value="{{r.idrole}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                                               {{r.libelle}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                    <div class="login-bottom">
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="sign-up">
+                                                <h4>Prenom :</h4>
+                                                <input type="text" class="form-control"  [(ngModel)]="user.prenom" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" >
+                                            </div>
+                                          </div>
+                                            <div class="sign-up">
+                                                <h4>Nom :</h4>
+                                                <input type="text" class="form-control"  [(ngModel)]="user.nom" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                            </div>
+                                            <div class="sign-up">
+                                                <h4>Adresse :</h4>
+                                                <input type="text" class="form-control"  [(ngModel)]="user.adresse" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                            </div>
+                                            <div class="sign-up">
+                                                <h4>Tel :</h4>
+                                                <input type="text" class="form-control"  [(ngModel)]="user.telephone" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                            </div>
+
+
+
+
+                                    </div>
+                                    <div class="login-right">
+
+
+                                            <div class="sign-in">
+                                                <h4>Email :</h4>
+                                                <input type="text" class="form-control"  [(ngModel)]="user.email" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                            </div>
+                                            <div class="sign-up">
+                                                <h4>Mot de passe :</h4>
+                                                <input type="password" class="form-control"  [(ngModel)]="user.password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+                                            </div>
+                                            <div class="sign-up">
+                                                <h4>Confirmer mot de passe :</h4>
+                                                <input type="password" value="Password" class="form-control"  [(ngModel)]="pass" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+                                            </div>
+                                            <div class="single-bottom">
+                                                <input type="checkbox"  id="brand" value="">
+                                                <label for="brand"><span></span>Remember Me.</label>
+                                            </div>
+                                            <div class="sign-in">
+                                                <button class="btn btn-primary" style="width: 50%" (click)="saveUser()" value="Valider" >Valider</button>
+                                            </div>
+
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <p> <strong>INSCRIPTION </strong> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <!-- //login -->
+
+
+   <!-- login 1 -->
+   <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-info">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body modal-spa">
+                <div class="login-grids">
+                    <div class="login">
+                        <div class="login-bottom">
+                            <h3>Inscription gratuite</h3>
+                            <p></p>
+                            <form>
+                                <label for="">Nouveau sur bourse-elevage.sn?</label>
+                                <div class="sign-up">
+                                    Veuillez-vous <button data-toggle="modal" data-target="#myModal4" data-dismiss="modal">INSCRIRE</button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="login-right">
+                            <h3>Connectez-vous avec votre compte</h3>
+                            <form>
+                                <div class="sign-in">
+                                    <h4>Email :</h4>
+                                    <input type="text" value="Taper ici" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                </div>
+                                <div class="sign-in">
+                                    <h4>Mot de passe :</h4>
+                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+                                    <a href="#">Mot de passe oublier?</a>
+                                </div>
+                                <div class="single-bottom">
+                                    <input type="checkbox"  id="brand" value="">
+                                    <label for="brand"><span></span>Remember Me.</label>
+                                </div>
+                                <div class="sign-in">
+                                    <input type="submit" value="Se connecter" >
+                                </div>
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p> <strong>AUTHENTIFICATION</strong> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //login -->
+
+
+

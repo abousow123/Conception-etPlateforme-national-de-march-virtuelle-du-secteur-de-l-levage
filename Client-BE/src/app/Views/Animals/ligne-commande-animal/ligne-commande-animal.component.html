@@ -1,0 +1,85 @@
+
+
+<!-- //banner -->
+<!-- check out -->
+<div class="checkout">
+	<div class="container">
+		<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
+			<table  class="timetable_sub">
+				<thead>
+					<tr>
+						<th>Supprimer</th>
+						<th>Sujet</th>
+					<!--	<th>Quantity</th> -->
+						<th>Nom</th>
+						<th>Prix</th>
+					</tr>
+				</thead>
+					<tr *ngFor="let l of lignes" >
+						<td class="invert-closeb">
+							<div class="rem" (click)="deleteLigne(l.idligneclient)">
+								<div class="close1"> </div>
+							</div>
+
+						</td>
+						<td class="invert-image"><a routerLink="/ligneComClient"><img [src]="l.animal.photo" alt=" " class="img-responsive" /></a></td>
+					<!--	<td class="invert">
+							 <div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value"><span>1</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
+							</div>
+						</td> -->
+						<td class="invert">{{l.animal.nom}}</td>
+						<td class="invert">{{l.animal.prix}}  FCFA</td>
+					</tr>
+
+
+								<!--quantity-->
+									<script>
+									$('.value-plus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+										divUpd.text(newVal);
+									});
+
+									$('.value-minus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+										if(newVal>=1) divUpd.text(newVal);
+									});
+									</script>
+								<!--quantity-->
+			</table>
+		</div>
+		<div class="checkout-left">
+
+				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+          <a href="mens.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour à l'accueil</a>
+
+        </div>
+
+
+        <h4 style="margin-left: 80%"><strong>Total </strong> : {{total}} cfa</h4>
+
+        <div  style="margin-left: 78%; margin-top: 2%">
+
+            <a (click)="validerCommande()"><button style="background-color: aquamarine; width: 100%">Valider Commande</button> </a>
+          </div>
+
+        <!-- <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+
+
+					<ul>
+
+            <li> <span><button disabled="disabled">Finaliser</button></span></li>
+
+          </ul>
+
+
+        </div> -->
+
+				<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>

@@ -1,0 +1,242 @@
+
+<!--
+
+  <label class="mat-label">Type Animal</label>
+  <select   placeholder="typeanimal" formControlName="typeanimal">
+    <option  *ngFor="let t of typeanimals?.content" value="{{t.idtypeanimal}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+       {{t.libelle}}
+    </option>
+
+     </select> <br/><br/>
+
+  <label class="mat-label">Titre</label>
+    <input   placeholder="Titre" formControlName="nom" required> <br/><br/>
+
+    <label class="mat-label">Sexe</label>
+    <select  placeholder="sexe"  formControlName="sexe">
+        <option value="male">male</option>
+        <option value="femelle">femelle</option>
+  </select><br/><br/>
+
+  <label class="mat-label">Poids</label>
+    <input   placeholder="Poids" formControlName="poids" required> <br/><br/>
+
+    <label class="mat-label">Gene</label>
+    <input   placeholder="gene" formControlName="codegenetique" required> <br/><br/>
+
+    <label class="mat-label">Prix</label>
+    <input   placeholder="prix" type="number" formControlName="prix" required> <br/><br/>
+
+    <label class="mat-label">Description</label>
+    <input   placeholder="description" formControlName="description" required> <br/><br/>
+
+//////////////////////////////////////////////////////
+ <div class="panel-heading"> Rédiger votre annonce</div>
+ <div class="panel-body">
+
+<form #f="ngForm" (ngSubmit)="saveAnimal()">
+ <div class="form-group">
+   <label class="control-label"> Catégorie Animal : </label>
+   <select  class="form-control" name="Idtypeanimal" [(ngModel)]="Idtypeanimal">
+  <option  *ngFor="let t of typeanimals?.content" value="{{t.idtypeanimal}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+   {{t.libelle}}
+   </option>
+
+ </select>
+ </div>
+ <div class="form-group">
+     <label class="control-label"> Titre : </label>
+     <input class="form-control" type="text" name="animal.nom" [(ngModel)]="animal.nom" required/>
+   </div>
+
+<div class="form-group">
+    <label class="control-label"> Sexe : </label>
+    <select  class="form-control"  name="animal.sexe" [(ngModel)]="animal.sexe">
+        <option value="male">male</option>
+        <option value="femelle">femelle</option>
+  </select>
+</div>
+
+<div class="form-group">
+    <label class="control-label"> Gène : </label>
+    <input class="form-control" type="text" name="animal.codegenetique" [(ngModel)]="animal.codegenetique" required/>
+  </div>
+
+  <div class="form-group">
+      <label class="control-label"> Poids : </label>
+      <input class="form-control" type="number" name="animal.poids" [(ngModel)]="animal.poids" required/>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label"> Description : </label>
+        <input class="form-control" type="text" name="animal.description" [(ngModel)]="animal.description" required/>
+      </div>
+
+      <div class="form-group">
+          <label class="control-label"> Prix : </label>
+          <input class="form-control" type="number"  name="animal.prix" [(ngModel)]="animal.prix" required/>
+        </div>
+
+     <button [disabled]="!f.valid" type="submit" class="btn btn-primary"> Valider</button>
+</form>
+</div>
+
+////////////////////////////////////////////////////////////////////////////
+ <div class="panel-heading">Publier Animal</div>
+    <div class="panel-body">
+
+        <div #f="ngForm" (ngSubmit)="saveAnimal(f.value)">
+            <div class="form-group">
+              <label class="control-label">idanimal:</label>
+              <input class="form-control" type="text" ngModel name="idanimal" required />
+            </div>
+
+            <div >
+              <h3>Type Animal</h3>
+              <select
+                class="form-control"
+                [(ngModel)]="type"
+              >
+               <option  *ngFor="let t of typeanimals?.content" value="{{t.idtypeanimal}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                {{t.libelle}}
+                </option>
+
+              </select>
+            </div>
+
+            <div >
+              <h3>Eleveur</h3>
+              <select
+                class="form-control"
+                [(ngModel)]="el"
+              >
+               <option  *ngFor="let e of eleveurs" value="{{e.numuser}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                {{e.numuser}}
+                </option>
+
+              </select>
+            </div>
+
+        <div class="form-group">
+            <label class="control-label">Nom:</label>
+            <input class="form-control" type="text" ngModel name="nom" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Sexe:</label>
+            <input class="form-control" type="text" ngModel name="sexe" required/>
+        </div>
+
+
+        <div class="form-group">
+              <label class="control-label">poids:</label>
+              <input class="form-control" type="number" ngModel name="poids" required/>
+        </div>
+
+
+        <button class="btn btn-primary" [disabled]="!f.valid" type="submit" >Save</button>
+
+      </div>
+
+
+  </div>  -->
+
+
+
+  <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+
+  <div class="modal-body modal-spa" style="margin-left: 15%; margin-right: 15%">
+    <h3 style="margin-left: 27%">Saisir les informations du Sujet</h3>
+    <p></p>
+
+
+    <div class="login-grids">
+
+        <div style="margin-left: 2%">
+            <label class="mat-label">photo</label>
+            <input type="file"  placeholder="photo" (change)="onSelectFile($event)" >
+           </div>
+            <p></p>
+
+        <div class="form-group" style="width: 45% ; margin-left: 2%" >
+            <label class="mat-label">Type Animal</label>
+            <select   class="form-control"  [(ngModel)]="idtypeanimal" >
+              <option  *ngFor="let t of typeanimals"  value="{{t.idtypeanimal}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                 {{t.libelle}}
+              </option>
+            </select>
+            </div>
+    <form [formGroup]="animalForm">
+
+
+
+
+
+
+
+  <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+        <div class="login">
+
+            <div class="login-bottom">
+
+
+                <div class="form-group">
+                    <div class="sign-up">
+                        <h4>Libelle :</h4>
+                        <input type="text" class="form-control"  formControlName="nom"  value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" >
+                    </div>
+                </div>
+
+
+                    <div class="sign-up">
+                        <h4>Description :</h4>
+                        <textarea type="text" class="form-control"  formControlName="description" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required></textarea>
+                    </div>
+                  <br/>
+                    <div class="sign-up">
+                        <h4>Prix :</h4>
+                        <input type="number" class="form-control" formControlName="prix" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required>
+
+                    </div>
+
+            </div>
+            <div class="login-right">
+                <div class="form-group">
+                    <div class="sign-up">
+                      Sexe :
+                    <select  placeholder="sexe" class="form-control"  formControlName="sexe" style="width: 40% ; margin-left: 1%">
+                      <option value="male">male</option>
+                      <option value="femelle">femelle</option>
+                    </select>
+                  </div>
+                    </div>
+              <div class="form-group">
+                <div class="sign-up">
+                    <h4>Code génétique :</h4>
+                    <input type="text" class="form-control"  formControlName="codegenetique"  value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" >
+                </div>
+            </div>
+                <div class="sign-up">
+                    <h4>Poids :</h4>
+                    <input type="number" class="form-control" formControlName="poids" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required>
+
+                </div>
+                <p></p>
+
+            <p></p>
+                    <div class="sign-in" >
+                        <button class="btn btn-primary" type="submit" [disabled]="!animalForm.valid" style="width: 50%; margin-left: 25%" (click)=" postAnimal(animalForm)" value="Valider" >Valider</button>
+                    </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+        <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
+    </form>
+      </div>
+  </div>
+
+
+

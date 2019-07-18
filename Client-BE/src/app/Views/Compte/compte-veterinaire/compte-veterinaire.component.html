@@ -1,0 +1,246 @@
+<div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+
+
+
+
+          <div class="css-treeview">
+              <h4>Votre Compte</h4>
+              <ul class="tree-list-pad">
+                  <li><input type="checkbox" checked="checked" id="item-0" /><label (click)="menuAnnonce()" for="item-0"><span></span>Publier</label>
+
+                  </li>
+
+                <li><input type="checkbox" checked="checked" id="item-0" /><label (click)="menuPub()" for="item-0"><span></span>Mes annonces</label>
+
+                </li>
+                <li>
+                  <input type="checkbox" id="item-1" checked="checked" /><label (click)="menuCom()" for="item-1">Les Commandes</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="item-1" checked="checked" /><label routerLink="/animal" for="item-1">Annonce Gouvernementale</label>
+                  </li>
+
+                <li>
+                    <input type="checkbox" id="item-1" checked="checked" /><label routerLink="/animal" for="item-1"><strong>Deconnexion</strong></label>
+                  </li>
+              </ul>
+            </div>
+
+
+    <!--
+
+
+        <h1 class="my-4">Mon Compte</h1>
+        <div class="list-group">
+          <a (click)="menuPub()" class="list-group-item">Liste publication</a>
+          <a href="#" (click)="menuCom()" class="list-group-item">Liste des commandes</a>
+          <a href="#" class="list-group-item">DECONNEXION</a>
+        </div>
+
+
+     /.col-lg-3 -->
+    </div>
+      <div  class="col-lg-9">
+
+        <div *ngIf="mode==0"  class="bs-docs-example">
+          <table   class="table table-striped">
+            <thead>
+              <tr>
+                <th><h3> NOM</h3></th>
+                <th ><h3 style="margin-left: 33%"> IMAGE</h3></th>
+                <th><h3>PRIX</h3></th>
+                <th><h3>ACTION</h3></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let l of animals">
+              <tr>
+                <td><h3>{{l.nom}}</h3> </td>
+                <td style="width: 40%; height: 30%;margin-left: 40%"><a data-toggle="modal" data-target="#myModal5"> <img style="width: 40%; height: 20%;margin-left: 30%"  [src]="l.photo"/></a></td>
+                <td><h3>{{l.prix}} fr </h3></td>
+                <td class="invert-closeb">
+                  <div class="rem" (click)="deleteAnimal(l.idanimal)">
+                    <div class="close1"> </div>
+                  </div>
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+        <div *ngIf="mode==1"  class="bs-docs-example">
+          <table   class="table table-striped">
+            <thead>
+              <tr>
+                <th><h3>Animal</h3></th>
+                <th ><h3 > IMAGE</h3></th>
+                <th><h3>Date Commande</h3></th>
+                <th><h3>Prix Commande</h3></th>
+                <th><h3>Livraison</h3></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let a of listLigne">
+              <tr>
+                <td><h3>{{a.animal.nom}}</h3> </td>
+                <td ><a data-toggle="modal" data-target="#myModal15"> <img style="width: 40%; height: 30%;margin-left: 40%"  [src]="a.animal.photo"/></a></td>
+                <td><h3>{{a.commandeclient.commande.datecommande}}  </h3></td>
+                <td><h3>{{a.animal.prix}} fr</h3></td>
+                <td>
+                  <div>
+                    <button (click)="validerLivraison(a.idligneclient)"><h3>livrer</h3> </button>
+                  </div>
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+
+    <div class="modal-body modal-spa" *ngIf="mode==2" >
+        <div class="modal-body modal-spa" >
+            <h3 style="margin-left: 27%">Saisir les informations du produit</h3>
+            <p></p>
+            <div class="login-grids">
+            <form [formGroup]="produitForm">
+              <div style="margin-left: 2%">
+                <label class="mat-label">photo</label>
+                <input type="file"  placeholder="photo" (change)="onSelectFile($event)" >
+              </div>
+                <p></p> <p></p>
+                <div class="login">
+
+                    <div class="login-bottom">
+                        <div class="form-group" style="width: 55%" >
+                            <label for="">Catégorie de produit</label>
+                            <select    class="form-control" formControlName="idcatprodveterinaire">
+                              <option  *ngFor="let r of catprodVeterinaire"  value="{{r.idcatprodveterinaire}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                                 {{r.nom}}
+                              </option>
+                            </select>
+
+
+                          </div>
+                    </div>
+
+                    <div class="login-right">
+
+                        <div class="form-group" style="width: 55%" >
+                            <label for="">Destiné</label>
+                            <select   class="form-control"   formControlName="typeproduit">
+                              <option  *ngFor="let t of typeanimals"  value="{{t.libelle}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                                 {{t.libelle}}
+                              </option>
+                            </select>
+
+
+                          </div>
+
+
+
+                </div>
+
+               </div>
+
+          <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+                <div class="login">
+
+                  <p></p>
+
+
+                    <div class="login-bottom">
+
+
+
+
+                        <div class="form-group">
+                            <div class="sign-up">
+                                <h4>Libelle :</h4>
+                                <input type="text" class="form-control"  formControlName="nom"  value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" >
+                            </div>
+                          </div>
+                            <div class="sign-up">
+                                <h4>Description :</h4>
+                                <textarea type="text" class="form-control"  formControlName="description" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""></textarea>
+                            </div>
+                            <p></p>
+
+                    </div>
+                    <div class="login-right">
+
+                        <div class="sign-up">
+                            <h4>Prix :</h4>
+                            <input type="number" class="form-control" formControlName="prix" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+                        </div>
+                        <p></p>
+                        <div class="sign-up">
+                            <h4>Mode D'emploi :</h4>
+                            <textarea type="text" class="form-control"   formControlName="modeemploi" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""></textarea>
+                        </div>
+
+
+
+                    <p></p>
+                            <div class="sign-in" >
+                                <button class="btn btn-primary" type="submit" [disabled]="!produitForm.valid" style="width: 50%; align-content: center" (click)="saveProdVeterinaire()" value="Valider" >Valider</button>
+                            </div>
+
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                </div>
+                <p></p>
+                </form>
+              </div>
+          </div>
+
+      </div>
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+
+  <!--modal**************************************************-->
+
+  <div class="modal fade" id="myModal15" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-info">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body modal-spa">
+                <div class="login-grids">
+
+
+
+
+
+
+
+
+
+
+                    <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+

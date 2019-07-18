@@ -1,0 +1,106 @@
+<div class="modal-body modal-spa " style="margin-left: 15%; margin-right: 15%">
+  <div></div>
+    <h3 style="margin-left: 30%; text-decoration-color: brown">Saisir les informations du produit</h3>
+    <p></p>
+    <p></p>
+    <div></div>
+  <div class="login-grids " style="background-color:floralwhite">
+  <form [formGroup]="produitForm">
+    <div style="margin-left: 2%">
+      <label class="mat-label">photo</label>
+      <input type="file"  placeholder="photo" (change)="onSelectFile($event)" >
+    </div>
+      <p></p> <p></p>
+      <div class="login">
+
+          <div class="login-bottom">
+              <div class="form-group" style="width: 55%" >
+                  <label for="">Catégorie de produit</label>
+                  <select    class="form-control" formControlName="idcatprodelevage">
+                    <option  *ngFor="let r of catprodElevage?.content"  value="{{r.idcatprodelevage}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                       {{r.nom}}
+                    </option>
+                  </select>
+
+
+                </div>
+          </div>
+
+          <div class="login-right">
+
+              <div class="form-group" style="width: 55%" >
+                  <label for="">Destiné</label>
+                  <select   class="form-control"   formControlName="typeproduit">
+                    <option  *ngFor="let t of typeanimals"  value="{{t.libelle}}"  ng-repeat="whitelabel in whitelabels track by whitelabel.WhiteLabel.id">
+                       {{t.libelle}}
+                    </option>
+                  </select>
+
+
+                </div>
+
+
+
+      </div>
+
+     </div>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
+      <div class="login">
+
+        <p></p>
+
+
+          <div class="login-bottom">
+
+
+
+
+              <div class="form-group">
+                  <div class="sign-up">
+                      <h4>Libelle :</h4>
+                      <input type="text" class="form-control"  formControlName="nom"  value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" >
+                  </div>
+                </div>
+                  <div class="sign-up">
+                      <h4>Description :</h4>
+                      <textarea type="text" class="form-control"  formControlName="description" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""></textarea>
+                  </div>
+                  <p></p>
+
+
+
+
+
+
+          </div>
+          <div class="login-right">
+
+              <div class="sign-up">
+                  <h4>Prix :</h4>
+                  <input type="number" class="form-control" formControlName="prix" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+              </div>
+              <p></p>
+              <div class="sign-up">
+                  <h4>Mode D'emploi :</h4>
+                  <textarea type="text" class="form-control"   formControlName="modeemploi" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""></textarea>
+              </div>
+
+
+
+          <p></p>
+                  <div class="sign-in" >
+                      <button class="btn btn-primary" type="submit" [disabled]="!produitForm.valid" style="width: 50%; align-content: center; margin-left: 25%" (click)="saveProdElevage()" value="Valider" >Valider</button>
+                  </div>
+
+          </div>
+
+
+          <div class="clearfix"></div>
+
+      </div>
+
+      </form>
+    </div>
+</div>
