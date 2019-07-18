@@ -1,0 +1,167 @@
+<GridLayout rows="auto,auto,*,auto" columns="auto">     
+
+       <GridLayout row="0" #navStatusBar class="navStatusBar" backgroundColor="#bd2122"
+        verticalAlignment="top" height="50" width="100%" rows="auto" columns="*,auto,auto,auto">
+        
+          <Label  row="0" text="Bourse de l'Elevage" class="status-title" horizontalAlignment="center"></Label>  
+        <Image col="1" row="0" (tap)="onSearchTap()" horizontalAlignment="right"
+            class="status-img" src="~/assets/images/search.png"></Image>
+       <!-- <Image col="2" row="0" (tap)="onBellTap()" horizontalAlignment="right"
+            class="status-img" src="~/assets/images/bell.png"></Image>
+        <Image horizontalAlignment="right" stretch="aspectFill" col="3" row="0" 
+            class="status-profile" src="~/assets/images/me.jpg"></Image> -->
+
+           
+           
+       
+         </GridLayout> 
+    
+    
+    
+
+    <GridLayout row="1" #navTab class="navTab" verticalAlignment="top" height="50"
+        width="100%" rows="auto" columns="25,*,*,*" color="#FFFFFF">
+
+        <GridLayout [class]="selectedTabview==0?'tabview.active':'tabview'"
+            (tap)="onPopularTap()" rows="*,auto" columns="auto" col="1" row="0">
+            <Image *ngIf="selectedTabview==0" row="0" class="navIcon" [src]="selectedTabview==0?'~/assets/images/popular.png':''"></Image>
+            <Label [class]="selectedTabview==0?'tabviewText.active':'tabviewText'"
+                row="1" text="Animaux"></Label>
+        </GridLayout>
+        <GridLayout [class]="selectedTabview==1?'tabview.active':'tabview'"
+            (tap)="onCategoryTap()" rows="*,auto" columns="auto" col="2" row="0"
+            width="34%">
+            <Image *ngIf="selectedTabview == 1" row="0" class="navIcon" [src]="selectedTabview==1?'~/assets/images/category.png':''"></Image>
+            <Label [class]="selectedTabview==1?'tabviewText.active':'tabviewText'"
+                row="1" text="Produits pour Elevage"></Label>
+        </GridLayout>
+        <GridLayout [class]="selectedTabview==2?'tabview.active':'tabview'"
+            (tap)="onPromosTap()" rows="*,auto" columns="auto" col="3" row="0"
+            width="33%">
+            <Image *ngIf="selectedTabview == 2" row="0" class="navIcon" [src]="selectedTabview==2?'~/assets/images/category.png':''"></Image>
+            <Label [class]="selectedTabview==2?'tabviewText.active':'tabviewText'"
+                row="1" text=""></Label>
+        </GridLayout>
+    </GridLayout> 
+
+
+
+
+    <GridLayout *ngIf="selectedTabview == 0" row="2" width="100%"
+    backgroundColor="white">
+
+      <RadListView [items]="animals" marginRight="-2" backgroundColor="#e6e6e6"
+        (itemLoading)="onItemLoading($event)">
+        <ListViewStaggeredLayout tkListViewLayout scrollDirection="Vertical"
+            spanCount="2"></ListViewStaggeredLayout>
+        <ng-template tkListItemTemplate let-item="item">
+            <StackLayout margin="8" borderRadius="10">   
+                <img [src]="item.photo"  stretch="aspectFill" (tap)="showItem(item.idanimal)" >
+                <StackLayout backgroundColor="white" padding="10">
+                    <Label text="{{ item.nom }}" class="item-name" textWrap="true"></Label>
+                   <!-- <Label text="{{ item.description }}" class="item-desc" textWrap="true"></Label> -->
+                    <Label text="{{ item.prix }} Fr" class="item-price"></Label>
+                    <Label text="Par: {{ item.eleveur.utilisateur.prenom }} {{ item.eleveur.utilisateur.nom }} " class="item-name"></Label>
+                </StackLayout> 
+            </StackLayout>  
+        </ng-template>
+       </RadListView>
+
+      </GridLayout>
+   
+
+    <GridLayout *ngIf="selectedTabview == 1" row="2" width="100%"
+        backgroundColor="white">
+       <RadListView [items]="produits" marginRight="-2" backgroundColor="#e6e6e6"
+        (itemLoading)="onItemLoading($event)">
+        <ListViewStaggeredLayout tkListViewLayout scrollDirection="Vertical"
+            spanCount="2"></ListViewStaggeredLayout>
+        <ng-template tkListItemTemplate let-item="item">
+            <StackLayout margin="8" borderRadius="10">  
+                <img [src]="item.photo"  stretch="aspectFill" (tap)="showItem(item.reference)" >
+                <StackLayout backgroundColor="white" padding="10">
+                    <Label text="{{ item.nom }}" class="item-name" textWrap="true"></Label>
+                   <!-- <Label text="{{ item.description }}" class="item-desc" textWrap="true"></Label> -->
+                    <Label text="{{ item.prix }} Fr" class="item-price"></Label>
+                  <!--  <Label text="Par: {{ item.eleveur.utilisateur.prenom }} {{ item.eleveur.utilisateur.nom }} " class="item-name"></Label> -->
+                </StackLayout> 
+            </StackLayout>  
+        </ng-template>
+       </RadListView>
+
+    </GridLayout>
+    <GridLayout *ngIf="selectedTabview == 2" row="2" width="100%">
+        
+          <ScrollView class="page">
+		<StackLayout>
+			<!-- On Android the card view plugin requires adding an external library
+				therefore it can't be demoed on Playground. You will have to download this project
+				and build it locally to try it on Android -->
+			<CardView *ngFor="let item of lignes" class="card" elevation="40" radius="10" ios:shadowRadius="3">
+				<StackLayout class="card-layout"  rows="auto"  columns="*">
+                    <img class="card-img-thumb" width="40%"  row="1" col="0" [src]="item.animal.photo"> 
+					<Label class="h2" row="1" col="0" [text]="item.animal.nom"></Label>
+				</StackLayout>
+			</CardView>
+		</StackLayout>
+	</ScrollView>
+      
+    </GridLayout>
+
+
+    <GridLayout *ngIf="selectedTabview == 3" row="2" width="100%" backgroundColor="white">
+
+     <Label class="h3 p-15 m-15 text-left">
+        <FormattedString>
+          <Span text="Words " color="#006600" ></Span>
+          <Span text="with " color="#990000" fontAttributes="Bold"></Span>
+          <Span text="different " color="#ffcc00"></Span>
+          <Span text="color."></Span>
+        </FormattedString>
+</Label>
+
+
+      </GridLayout>
+   
+
+
+
+
+    <GridLayout class="navBottom" height="50" width="100%" row="3" rows="auto"
+        columns="auto,auto,auto,auto">
+
+        <GridLayout [class]="selectedTab==0?'nav active':'nav'" (tap)="onHomeTap()"
+            rows="*,auto" cols="auto" col="0" row="0" width="25%">
+            <Image [class]="selectedTab==0?'navIcon active':'navIcon'" row="0"
+                [src]="selectedTab==0?'~/assets/images/navhomem.png':'~/assets/images/navhome.png'"></Image>
+            <Label row="1" *ngIf="selectedTab==0" text="Accueil" class="navText"></Label>
+        </GridLayout> 
+        <GridLayout [class]="selectedTab==2?'nav active':'nav'" (tap)="onCartTap()"
+            rows="*,auto" cols="auto" col="2" row="0" width="25%">
+            <Image [class]="selectedTab==2?'navIcon ':'navIcon'" row="0"
+                [src]="selectedTab==2?'~/assets/images/navcartm.png':'~/assets/images/navcart.png'"></Image>
+            <Label row="1" *ngIf="selectedTab == 2" text="Panier" class="navText"></Label>
+        </GridLayout>  
+     
+        <GridLayout [class]="selectedTab==1?'nav active':'nav'" (tap)="onHistoryTap() " 
+            rows="*,auto" cols="auto" col="1" row="0" width="25%">
+            <Image [class]="selectedTab==1?'navIcon active':'navIcon'" row="0"
+                [src]="selectedTab==1?'~/assets/images/navordersm.png':'~/assets/images/navorders.png'"></Image>
+            <Label row="1" *ngIf="selectedTab == 1" text="publier" class="navText"></Label>
+        </GridLayout>
+    
+
+        <GridLayout [class]="selectedTab==3?'nav active':'nav'" (tap)="onAboutTap()"
+            rows="*,auto" cols="auto" col="3" row="0" width="25%">
+
+            <Image [class]="selectedTab==3?'navIcon active':'navIcon'" row="0"
+                [src]="selectedTab==3?'~/assets/images/navusm.png':'~/assets/images/navus.png'"></Image>
+            <Label row="1" *ngIf="selectedTab == 3" text="Compte" class="navText"></Label>
+        </GridLayout>
+    </GridLayout>
+
+
+
+
+
+</GridLayout>

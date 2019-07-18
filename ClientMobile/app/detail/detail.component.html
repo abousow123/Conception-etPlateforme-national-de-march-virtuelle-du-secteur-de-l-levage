@@ -1,0 +1,143 @@
+ <StackLayout class="main">
+
+ 	<ScrollView #scrollView  height="90%">
+		<StackLayout>
+   
+     <ScrollView class="anim-images" orientation="vertical">
+    <GridLayout class="anim-cover" rows="auto" columns="*">
+        <img row="0" col="0" marginTop="-40" height="180" stretch="aspectFill" (tap)="onLog()" class="card-img" [src]="animal.photo">
+        <Label row="0" col="0" verticalAlignment="top" horizontalAlignment="left"
+            (tap)="onCloseTap()" fontSize="24" text="&#xf060;" class="fa close">
+        </Label>
+    </GridLayout>
+    </ScrollView>
+
+    <ScrollView class="anim-images" orientation="horizontal">
+        <StackLayout orientation="horizontal" class="">
+            <GridLayout  rows="auto"  columns="*">
+                <img class="card-img-thumb" row="1" col="0" [src]="animal.photo" stretch="aspectFill">
+            </GridLayout> 
+            <GridLayout  rows="auto"  columns="*">
+                <img class="card-img-thumb" row="1" col="0" [src]="animal.photo" stretch="aspectFill">
+            </GridLayout>
+            <GridLayout  rows="auto"  columns="*">
+                <img class="card-img-thumb" row="1" col="0" [src]="animal.photo" stretch="aspectFill">
+            </GridLayout>
+        </StackLayout> 
+    </ScrollView>
+
+    <GridLayout rows="auto,auto,auto,auto" columns="auto" class="content">
+
+        <GridLayout *ngIf="animal" class="anim-itemInfo" marginTop="2" row="1"
+            width="100%" columns="auto,*" rows="auto,auto,auto,auto"
+            verticalAlignment="center">
+            
+            <Label row="0" col="0" class="item-name" textwrap="true"
+                verticalAlignment="bottom" horizontalAlignment="left" [text]="animal.nom"></Label>
+
+             
+            <Label row="1" col="0" class="item-name" [text]="datef"></Label>
+            <Label row="1" col="1" class="item-name" [text]="'par: '+animal.eleveur.utilisateur.prenom + ' ' + animal.eleveur.utilisateur.nom"></Label>
+
+
+           <!-- <StackLayout row="3" col="1" orientation="horizontal">
+                <Label class="fa rate" text="&#xf005;"></Label>
+                <Label class="fa rate" text="&#xf005;"></Label>
+                <Label class="fa rate" text="&#xf005;"></Label>
+                <Label class="fa rate" text="&#xf005;"></Label>
+                <Label class="fa rate" text="&#xf123;"></Label>
+            </StackLayout> -->
+
+
+        </GridLayout>
+
+        <StackLayout class="line anim-likes" row="2" width="100%" marginTop="10"></StackLayout>
+
+
+ 
+        
+
+        <GridLayout *ngIf="animal" columns="auto,*,auto,auto" rows="auto"
+            marginTop="5" width="100%" row="3" class="anim-likes">
+            
+                
+                <Label col="1" row="0" class="layout" [text]=" 'prix: ' + animal.prix +' FCFA'"></Label>
+           
+            <!-- <StackLayout col="1" orientation="horizontal" marginLeft="15">
+                <Label ref="" class="like-icon layout fa" text="&#xf0e5;"></Label>
+                <Label class="layout" [text]="animal.sexe"></Label>
+            </StackLayout> 
+            <GridLayout col="1" rows="auto" columns="auto,auto" (tap)="toggleHeart(item)"
+                marginRight="15" marginLeft="15">
+                <Label col="0" row="0" #favorite [text]="animal.codegenetique"></Label>
+                 <Label col="1" row="0" class="layout" text=""></Label>
+            </GridLayout> 
+            <StackLayout col="3" orientation="horizontal">
+                <Label ref="" class="like-icon layout fa" text="&#xf045;"></Label>
+                <Label class="layout" text="Share"></Label>
+            </StackLayout>  --> 
+
+        </GridLayout>
+
+
+    </GridLayout>
+
+    <StackLayout width="100%" class="lineBreak anim-likes"></StackLayout>
+
+    <Gridlayout rows="auto,*" height="20%" class="content anim-content" marginTop="15">
+
+        <GridLayout row="0" rows="auto" marginBottom="5" columns="auto, auto">
+            <Label col="0" text="&#xf02c;" class="fa description-icon"
+                textWrap="true"></Label>
+            <Label col="1" class="description-text" text="Caracteristiques"
+                textWrap="true"></Label>
+        </GridLayout>
+
+        <StackLayout row="1">  
+            <ScrollView>
+                <StackLayout verticalAlignment="top" horizontalAlignment="left"
+                    *ngIf="animal">
+                    <Label marginLeft="30" col="1" row="0"  [text]=" 'Sexe: ' + animal.sexe"></Label>
+                    <Label marginLeft="30" col="1" row="0"  [text]=" 'Poids: ' + animal.poids +' kg'"></Label>
+                    <Label marginLeft="30" col="1" row="0"  [text]=" 'Race: ' + animal.codegenetique "></Label>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+      
+
+    </Gridlayout>
+
+
+
+ <Gridlayout rows="auto,*" height="20%" class="content anim-content" marginTop="15">
+
+        <GridLayout row="0" rows="auto" marginBottom="5" columns="auto, auto">
+            <Label col="0" text="&#xf02c;" class="fa description-icon"
+                textWrap="true"></Label>
+            <Label col="1" class="description-text" text="Description"
+                textWrap="true"></Label>
+        </GridLayout>
+
+        <StackLayout row="1">  
+            <ScrollView>
+                <StackLayout verticalAlignment="top" horizontalAlignment="left"
+                    *ngIf="animal">
+                    <Textview editable="false" class="description-value"
+                        textWrap="true" [text]="animal.description">
+                    </Textview>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+      
+
+    </Gridlayout>
+
+
+	</StackLayout>
+	</ScrollView>
+
+
+       <Button class="btn btn-primary but" marginTop="7"  text="Acheter" fontSize="25%" (tap)="onAcheter()"></Button> 
+     
+
+</StackLayout> 
