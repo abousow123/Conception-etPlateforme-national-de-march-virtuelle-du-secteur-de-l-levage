@@ -40,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
 		if (!user.getPassword().equals(passwordConfirmed))
 			throw new RuntimeException("Svp confirmĂ© votre mot de passe");
 		Utilisateur compte = user;
-		compte.setNumuser(user.getNumuser());
+		compte.setId(user.getId());
 	
 		compte.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		// compte.setActived(true);

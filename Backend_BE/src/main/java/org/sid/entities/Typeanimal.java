@@ -1,10 +1,7 @@
 package org.sid.entities;
 // Generated 5 mars 2019 12:53:42 by Hibernate Tools 3.6.0.Final
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,32 +25,24 @@ public class Typeanimal implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int idtypeanimal;
+
+	private String id = UUID.randomUUID().toString() ;
 	private String libelle;
 	private List<Animal> animals = new ArrayList();
 
 	public Typeanimal() {
 	}
 
-	public Typeanimal(int idtypeanimal) {
-		this.idtypeanimal = idtypeanimal;
-	}
 
-	public Typeanimal(int idtypeanimal, String libelle, List<Animal> animals) {
-		this.idtypeanimal = idtypeanimal;
-		this.libelle = libelle;
-		this.animals = animals;
-	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "idtypeanimal", unique = true, nullable = false)
-	public int getIdtypeanimal() {
-		return this.idtypeanimal;
+	@Column(name = "id", unique = true, nullable = false)
+	public String getId() {
+		return this.id;
 	}
 
-	public void setIdtypeanimal(int idtypeanimal) {
-		this.idtypeanimal = idtypeanimal;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Column(name = "libelle", length = 254)

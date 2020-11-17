@@ -2,17 +2,8 @@ package org.sid.entities;
 // Generated 5 mars 2019 12:53:42 by Hibernate Tools 3.6.0.Final
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.UUID;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,42 +14,29 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "membre", schema = "public")
 public class Membre implements java.io.Serializable {
 
-	private MembreId id;
-	private Gie gie;
-	private Eleveur eleveur;
+	private String id = UUID.randomUUID().toString();
 	private Date dateadhesion;
+
+	//relation
+	private Gie gie;
+	private Utilisateur utilisateur;
 
 	public Membre() {
 	}
 
-	public Membre(MembreId id, Gie gie, Eleveur eleveur) {
-		this.id = id;
-		this.gie = gie;
-		this.eleveur = eleveur;
-	}
 
-	public Membre(MembreId id, Gie gie, Eleveur eleveur, Date dateadhesion) {
-		this.id = id;
-		this.gie = gie;
-		this.eleveur = eleveur;
-		this.dateadhesion = dateadhesion;
-	}
-
-	@EmbeddedId
-
-	@AttributeOverrides({
-			@AttributeOverride(name = "numuser", column = @Column(name = "numuser", nullable = false, length = 254)),
-			@AttributeOverride(name = "idgie", column = @Column(name = "idgie", nullable = false)) })
-	public MembreId getId() {
+	@Id
+	@Column(name = "id", unique = true, nullable = false, length = 254)
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(MembreId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idgie", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
 	@JsonIgnoreProperties("membres")
 	public Gie getGie() {
 		return this.gie;
@@ -68,16 +46,6 @@ public class Membre implements java.io.Serializable {
 		this.gie = gie;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "numuser", nullable = false, insertable = false, updatable = false)
-	@JsonIgnoreProperties("membres")
-	public Eleveur getEleveur() {
-		return this.eleveur;
-	}
-
-	public void setEleveur(Eleveur eleveur) {
-		this.eleveur = eleveur;
-	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dateadhesion", length = 29)
@@ -89,4 +57,14 @@ public class Membre implements java.io.Serializable {
 		this.dateadhesion = dateadhesion;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+	@JsonIgnoreProperties("membres")
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 }

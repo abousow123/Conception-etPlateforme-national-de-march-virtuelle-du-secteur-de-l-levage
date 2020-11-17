@@ -4,15 +4,8 @@ package org.sid.entities;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.UUID;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,45 +16,48 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "produit", schema = "public")
 public class Produit implements java.io.Serializable {
 
-	private String referenceproduit;
+	private String id = UUID.randomUUID().toString();
+
+	private String referenceProduit;
 	private String photo;
 	private String nom;
 	private String description;
-	private String modeemploi;
-	private Double prix;
-	private String typeproduit;
-	private Date datepublication;
-	private Set<Lignecommandeeleveur> lignecommandeeleveurs = new HashSet(0);
+	private String modeEmploi;
+	private double prix;
+	private String typeProduit;
+	private Date datePublication;
+	private boolean selectionne;
+	private boolean disponible;
+
+	//relation
+	Utilisateur utilisateur;
+	Category category;
+
+	//private Set<Lignecommandeeleveur> lignecommandeeleveurs = new HashSet(0);
 	
 
 	public Produit() {
 	}
 
-	public Produit(String referenceproduit) {
-		this.referenceproduit = referenceproduit;
-	}
-
-	public Produit(String referenceproduit, String nom, String description, String modeemploi, Double prix,
-			String typeproduit,Date datepublicaton) {
-		this.referenceproduit = referenceproduit;
-		this.nom = nom;
-		this.description = description;
-		this.modeemploi = modeemploi;
-		this.prix = prix;
-		this.typeproduit = typeproduit;
-	    this.datepublication = datepublicaton ;
-		
-	}
 
 	@Id
+	@Column(name = "id", unique = true, nullable = false)
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 
 	@Column(name = "referenceproduit", unique = true, nullable = false, length = 254)
 	public String getReferenceproduit() {
-		return this.referenceproduit;
+		return this.referenceProduit;
 	}
 
 	public void setReferenceproduit(String referenceproduit) {
-		this.referenceproduit = referenceproduit;
+		this.referenceProduit = referenceproduit;
 	}
 
 	@Column(name = "nom", length = 254)
@@ -93,11 +89,11 @@ public class Produit implements java.io.Serializable {
 
 	@Column(name = "modeemploi", length = 254)
 	public String getModeemploi() {
-		return this.modeemploi;
+		return this.modeEmploi;
 	}
 
 	public void setModeemploi(String modeemploi) {
-		this.modeemploi = modeemploi;
+		this.modeEmploi = modeemploi;
 	}
 
 	@Column(name = "prix", precision = 17, scale = 17)
@@ -111,34 +107,60 @@ public class Produit implements java.io.Serializable {
 
 	@Column(name = "typeproduit", length = 254)
 	public String getTypeproduit() {
-		return this.typeproduit;
+		return this.typeProduit;
 	}
 
 	public void setTypeproduit(String typeproduit) {
-		this.typeproduit = typeproduit;
+		this.typeProduit = typeproduit;
 	}
 
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "produit")
-	@JsonIgnoreProperties("produit")
-	public Set<Lignecommandeeleveur> getLignecommandeeleveurs() {
-		return this.lignecommandeeleveurs;
-	}
-
-	public void setLignecommandeeleveurs(Set<Lignecommandeeleveur> lignecommandeeleveurs) {
-		this.lignecommandeeleveurs = lignecommandeeleveurs;
-	}
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "datepublication", length = 29)
 	public Date getDatepublication() {
-		return datepublication;
+		return datePublication;
 	}
 
 	public void setDatepublication(Date datepublication) {
-		this.datepublication = datepublication;
+		this.datePublication = datepublication;
 	}
 
-	
 
+	@Column(name = "selectionne")
+	public boolean isSelectionne() {
+		return selectionne;
+	}
+
+	public void setSelectionne(boolean selectionne) {
+		this.selectionne = selectionne;
+	}
+
+	@Column(name = "disponible")
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@JsonIgnoreProperties("produitelevages")
+	//@JsonIgnore
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 }

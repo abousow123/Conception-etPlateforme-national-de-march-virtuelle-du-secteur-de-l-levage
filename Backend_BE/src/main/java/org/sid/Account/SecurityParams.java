@@ -4,7 +4,7 @@ public interface SecurityParams {
 	
 	public static final String JWT_HEADER_NAME="Authorization" ;
 	
-	public static final String SECRET="papa@kebe.net";
+	public static final String SECRET="abou@kebe.net";
 	
 	public static final long EXPIRATION=10*24*3600 ;
 	

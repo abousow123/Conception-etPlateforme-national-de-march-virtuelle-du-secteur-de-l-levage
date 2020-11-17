@@ -8,6 +8,7 @@ import org.sid.Account.AccountService;
 import org.sid.dao.ClientRepository;
 import org.sid.dao.UtilisateurRepository;
 import org.sid.entities.Client;
+import org.sid.entities.Commande;
 import org.sid.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,8 +24,6 @@ public class ClientImpl implements ClientService{
 	@Autowired
 	private AccountService accuntService;
 
-	@Autowired
-	private UtilisateurRepository utilisateurRepository;
 
 	@Override
 	public List<Client> getClients() {
@@ -39,18 +38,15 @@ public class ClientImpl implements ClientService{
 	}
 
 	@Override
-	public Client saveClient(String client, String pass) throws JsonParseException, JsonMappingException, IOException {
-		// TODO Auto-generated method stub
-		Client c = new ObjectMapper().readValue(client, Client.class);
-		accuntService.saveCompte(c.getUtilisateur(), pass);
-		return clientRepository.save(c);
+	public Client saveClient(Client client) {
+		return clientRepository.save(client);
 	}
 
 	@Override
 	public boolean deleteClient(String ref) {
 		// TODO Auto-generated method stub
 		clientRepository.deleteById(ref);
-		utilisateurRepository.deleteById(ref);
+		//utilisateurRepository.deleteById(ref);
 		return true;
 	}
 
@@ -63,12 +59,6 @@ public class ClientImpl implements ClientService{
 		 * if(c==null){ return null ; }
 		 */
 
-		Utilisateur u = client.getUtilisateur();
-		u.setNumuser(u.getNumuser());
-		c.setNumuser(u.getNumuser());
-		c.setUtilisateur(u);
-
-		utilisateurRepository.saveAndFlush(u);
 		return clientRepository.saveAndFlush(c);
 	}
 

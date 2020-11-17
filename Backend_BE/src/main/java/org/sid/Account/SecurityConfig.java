@@ -32,12 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// http.formLogin() ;
 		http.csrf().disable();
+		http.headers().frameOptions().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests()
 				.antMatchers("/Animals/**", "/Clients/**", "/Roles/**", "/CommandeClients/**", "/LigneComClients/**","/Distributeurs/**",
 						"/chercherAnimals/**", "/CategorieProduitElevages/**", "/CategorieProduitVeterinaires/**",
 						"/ProduitVeterinaires/**", "/ProduitElevages/**", "/chercherProduitElevages/**", "/Produits/**",
-						"/ChercherAnimalsByUser/**","/Eleveurs/**","/Veterinaires/**","/TypeAnimals/**","/ChercherAnimalsByName/**","/Users/**")
+						"/ChercherAnimalsByUser/**","/Eleveurs/**","/Veterinaires/**","/TypeAnimals/**","/ChercherAnimalsByName/**","/Users/**","/h2-console/**")
 				.permitAll();
 		http.authorizeRequests().antMatchers("/comptes/**", "/roles/**").hasAuthority("Eleveur");
 		http.authorizeRequests().anyRequest().authenticated();

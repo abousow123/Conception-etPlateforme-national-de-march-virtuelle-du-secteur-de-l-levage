@@ -3,6 +3,7 @@ package org.sid.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,32 +23,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "role", schema = "public")
 public class Role implements java.io.Serializable {
 
-	private int idrole;
+	private String id = UUID.randomUUID().toString() ;
 	private String libelle;
-	private Set<Utilisateur> utilisateurs = new HashSet(0);
+	//private Set<Utilisateur> utilisateurs = new HashSet(0);
 
 	public Role() {
 	}
 
-	public Role(int idrole) {
-		this.idrole = idrole;
-	}
-
-	public Role(int idrole, String libelle, Set<Utilisateur> utilisateurs) {
-		this.idrole = idrole;
-		this.libelle = libelle;
-		this.utilisateurs = utilisateurs;
-	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "idrole", unique = true, nullable = false)
-	public int getIdrole() {
-		return this.idrole;
+	@Column(name = "id", unique = true, nullable = false)
+	public String getId() {
+		return this.id;
 	}
 
-	public void setIdrole(int idrole) {
-		this.idrole = idrole;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Column(name = "libelle", length = 254)
@@ -59,7 +50,7 @@ public class Role implements java.io.Serializable {
 		this.libelle = libelle;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "role")
+	/*@OneToMany(fetch = FetchType.EAGER, mappedBy = "role")
 	@JsonIgnoreProperties("role")
 	public Set<Utilisateur> getUtilisateurs() {
 		return this.utilisateurs;
@@ -68,5 +59,7 @@ public class Role implements java.io.Serializable {
 	public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
 		this.utilisateurs = utilisateurs;
 	}
+
+	 */
 
 }

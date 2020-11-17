@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface AnimalRepository extends JpaRepository<Animal, String> {
 	
-	@Query("select c from Animal c where c.eleveur.numuser like :x")
-	public List<Animal> chercherAnimalsByEleveur(@Param("x") String mc) ;
+	@Query("select c from Animal c where c.utilisateur.id like :x")
+	public List<Animal> chercherAnimalsByUser(@Param("x") String mc) ;
 	
 	@Query("select c from Animal c where  c.typeanimal.libelle like :x")
 	public List<Animal> chercherAnimalsByName(@Param("x") String mc) ;
